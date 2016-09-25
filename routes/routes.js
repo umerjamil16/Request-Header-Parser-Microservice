@@ -13,8 +13,10 @@ module.exports = function(express, app, moment) {
         if (!isNaN(req.params.unix)) {
             obj.unix = req.params.unix;
             obj.natural = moment.unix(req.params.unix).toString().slice(4, 16);
-        } else {
-            obj.natural = req.params.unix;
+        } else  {
+            if(req.params.unix.indexOf("20") !== -1){
+           obj.natural = req.params.unix;
+        }
 
             var arr1 = req.params.unix.toString().split(",");
             var arr2 = arr1[0].split(" ");
