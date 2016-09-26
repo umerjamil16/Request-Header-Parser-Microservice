@@ -1,4 +1,4 @@
-module.exports = function(express, app, moment) {
+module.exports = function(express, app) {
     var router = express.Router();
     var platform = require('platform');
     var ipInfo = require("ipinfo");
