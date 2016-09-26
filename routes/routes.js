@@ -1,10 +1,32 @@
 module.exports = function(express, app, moment) {
     var router = express.Router();
+    var platform = require('platform');
     var obj = {};
     moment().format();
+const ipInfo = require("ipinfo");
+// inside middleware handler
+// var ipMiddleware = function(req, res, next) {
+//     var clientIp = requestIp.getClientIp(req); // on localhost > 127.0.0.1
+//     console.log("IP: " +clientIp);
+//     next();
+// };
+
+    
+
+
+//    obj.
 
     router.get("/", function(req, res, next) {
-        res.render("index", {});
+    //   console.log ( "Platform" +  platform.os);
+    ipInfo((err, cLoc) => {
+       obj.IP = cLoc.ip;
+    });
+    obj.software = platform.os;
+    obj.language = req.acceptsLanguages( 'en-US', 'uk', 'ru-mo', 'be' );
+    res.send(obj);
+
+    // console.log("IP: " + ipMiddleware.clientIp);
+//        res.render("index", {});
     });
 
     router.get("/:unix", function(req, res, next) {
